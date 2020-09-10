@@ -1,0 +1,48 @@
+﻿@model EmpDetails.ViewModels.NewEmployeeViewModel
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<h2>New Employee</h2>
+
+@using (Html.BeginForm("Create", "Employees"))
+{
+    <div class="form-group" style="width:370px;">
+        @Html.LabelFor(c => c.Employee.Name)
+        @Html.TextBoxFor(c => c.Employee.Name, new { @class = "form-control " })
+    </div>
+    <div class="form-group" style="width:370px;">
+        @Html.LabelFor(c => c.Employee.Email)
+        @Html.TextBoxFor(c => c.Employee.Email, new { @class = "form-control " })
+    </div>
+    <div class="form-group" style="width:370px;">
+        @Html.LabelFor(c => c.Employee.Password)
+        @Html.TextBoxFor(c => c.Employee.Password, new { @class = "form-control " })
+    </div>
+    <div class="form-group" style="width:370px;">
+        @Html.LabelFor(c => c.Employee.Salary)
+        @Html.TextBoxFor(c => c.Employee.Salary, new { @class = "form-control " })
+    </div>
+
+    <div class="form-group" style="width:370px;">
+        @Html.LabelFor(c => c.Departments)
+        @Html.DropDownListFor(c => c.Employee.DepartmentId, new SelectList(Model.Departments, "Id", "DeptName"), "Select Department ", new { @class = "form-control " })
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(c => c.Employee.IsActive)  Is Active ?
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.Employee.Id)
+    <button type="submit" class="btn btn-primary"> Submit </button>
+
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

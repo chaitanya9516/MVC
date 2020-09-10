@@ -1,0 +1,75 @@
+﻿@using EmpDetails.Models
+@model EmpDetails.Models.Employee
+@{
+    ViewBag.Title = "Log in";
+}
+    <head>
+        <script src="vendor/jquery/dist/jquery.min.js"></script>
+    </head>
+
+<h2>@ViewBag.Title.</h2>
+<div class="row">
+    <div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Employees", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <br />
+                <br />
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+                <br />
+                <br />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+
+            }
+            @if (Model != null && Model.Department != null && Model.Department.IsActive)
+            {
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <label style="color:red"> Invalid Credentials  </label>
+                    </div>
+                </div>
+            }
+            <div class="pull-right">
+
+                @Html.ActionLink("Forgot Password ?", "ForgotPassword", "Employees", null)
+            </div>
+
+        </section>
+    </div>
+
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

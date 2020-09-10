@@ -1,0 +1,29 @@
+﻿
+@model EmpDetails.ViewModels.NewEmployeeViewModel
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/style.css")" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<h2>New Department</h2>
+
+@using (Html.BeginForm("Create", "Departments"))
+{
+    <div class="form-group" style="width:370px;">
+        @Html.LabelFor(c => c.Department.Deptname)
+        @Html.TextBoxFor(c => c.Department.Deptname, new { @class = "form-control " })
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(c => c.Department.IsActive)  Is Active ?
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.Department.Id)
+    <button type="submit" class="btn btn-primary"> Submit </button>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}
